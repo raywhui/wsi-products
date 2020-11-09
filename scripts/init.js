@@ -10,19 +10,12 @@ const intToCurrency = (int) => {
   return price;
 }
 
-(async () => {
-  const productsData = await getData();
-  const {
-    groups
-  } = productsData;
-
-  // Compile Handlebars
+// Compile Handlebars
+const renderProducts = (items) => {
   const source = document.getElementById('product-template').innerHTML;
   const cardTemplate = Handlebars.compile(source);
   const context = {
-    title: productsData.id,
-    author: 'This is my first post!',
-    products: groups.map((data, i) => { // Map products array
+    products: items.map((data, i) => { // Map products array
       let regularPrice = '',
         sellingPrice = '';
       if (!!data.priceRange) {
@@ -52,7 +45,12 @@ const intToCurrency = (int) => {
       };
     }),
   };
-  console.log('context:', context);
   const html = cardTemplate(context);
-  document.querySelector('#product-list').innerHTML = html;
+  return html
+}
+
+(async () => {
+  const productsData = await getData();
+  const allItemsHtml = renderProducts(productsData.groups)
+  document.querySelector('#product-list').innerHTML = allItemsHtml;
 })();
