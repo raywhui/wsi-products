@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <title>WSI Coding Assessment</title>
+  <!-- <link rel="stylesheet" href="css/styles.css?v=1.0" /> -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="styles/dist/main.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.6/handlebars.min.js"
+    integrity="sha512-zT3zHcFYbQwjHdKjCu6OMmETx8fJA9S7E6W7kBeFxultf75OPTYUJigEKX58qgyQMi1m1EgenfjMXlRZG8BXaw=="
+    crossorigin="anonymous"></script>
+</head>
+
+<body>
+  <nav>
+    <div class="nav-wrapper blue-grey lighten-1">
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li><a href="sass.html">All Products</a></li>
+        <li><a href="sass.html">Saved List</a></li>
+      </ul>
+    </div>
+  </nav>
+  <div class="product-container">
+    <div id="product-list" class=""></div>
+  </div>
+  <!-- Handlebars Product Item Template - START -->
+  <script id="product-template" type="text/x-handlebars-template">
+    {{#each products}}
+      <div class='product-grid-item'>
+        <div class='card'>
+          <div class='card-image'>
+            <img src='{{this.image}}' />
+            <a data-product-id='{{this.id}}' data-key={{this.key}} class='btn-floating halfway-fab blue-grey lighten-1' onclick="saveToLocal(event)">
+              <i class='material-icons'>
+                star_border
+              </i>
+            </a>
+          </div>
+          <div class='card-content'>
+            <span class='product-title card-title'>
+              {{this.title}}
+            </span>
+            <p class='regular-price'>
+              {{this.price.regular}}
+            </p>
+            <p class='selling-price'>
+              {{this.price.selling}}
+            </p>
+          </div>
+        </div>
+      </div>
+    {{/each}}
+  </script>
+  <!-- Handlebars Product Item Template - END -->
+  <script src="scripts/handlers.js"></script>
+  <script src="scripts/init.js"></script>
+</body>
+
+</html>

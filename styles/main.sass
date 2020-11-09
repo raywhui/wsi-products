@@ -1,0 +1,41 @@
+$breakpoint-s: 600px
+$breakpoint-l: 796px
+
+%product-card-style
+  font-size: 13px
+  font-weight: 700
+  color: #505050
+
+body
+  font-family: 'Roboto', sans-serif
+
+  .product-container
+    width: $breakpoint-l
+    margin: 0 auto
+    @media screen and (max-width: $breakpoint-l)
+      width: 100%
+
+  .product-grid-item
+    width: $breakpoint-l / 3 - 10px
+    display: inline-block
+    vertical-align: top
+    margin: 10px 3px
+
+    @media screen and (max-width: $breakpoint-l)
+      width: 45%
+      margin: 0px 2.3%
+
+    @media screen and (max-width: $breakpoint-s)
+      width: 95%
+      margin: 0px 2.5%
+
+  .card .product-title.card-title
+    font-size: 13px
+    line-height: 1.5
+
+  .regular-price
+    @extend %product-card-style
+    text-decoration: line-through
+
+  .selling-price
+    @extend %product-card-style
