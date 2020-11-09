@@ -11,7 +11,7 @@ const intToCurrency = (int) => {
 }
 
 // Compile Handlebars
-const renderProducts = (items) => {
+const renderProducts = (items, savedList = false) => {
   const source = document.getElementById('product-template').innerHTML;
   const cardTemplate = Handlebars.compile(source);
   const context = {
@@ -34,6 +34,7 @@ const renderProducts = (items) => {
         sellingPrice = `${intToCurrency(selling)}`
       }
       return {
+        savedList: savedList,
         key: i,
         image: data.images[0].href,
         id: data.id,
@@ -44,7 +45,10 @@ const renderProducts = (items) => {
         },
       };
     }),
+    savedList: savedList,
+    titles: 'joejoe'
   };
+  console.log(context)
   const html = cardTemplate(context);
   return html
 }

@@ -19,14 +19,14 @@ const savedListRender = async () => {
     })
   }
   // Replace all product items with saved list items
-  const savedProductsHtml = renderProducts(filteredProducts)
+  const savedProductsHtml = renderProducts(filteredProducts, true)
   document.querySelector('#product-list').innerHTML = savedProductsHtml;
 }
 
 
 /**
  * @description - Handles Save to LocalStorage
- * @param {*} event - Event
+ * @param {*} event
  */
 const saveToLocal = (event) => {
   const {
@@ -48,6 +48,22 @@ const saveToLocal = (event) => {
       savedProductIDs: [productId]
     }))
   }
+}
+
+const removeFromLocal = (event) => {
+  const {
+    productId,
+  } = event.currentTarget.dataset
+
+  const parsedProductIDs = JSON.parse(productsStorage.wsiSavedProducts).savedProductIDs
+  let savedProductsSet = new Set(parsedProductIDs)
+  savedProductsSet.delete(productId)
+  productsStorage.setItem('wsiSavedProducts', JSON.stringify({
+    savedProductIDs: [...savedProductsSet]
+  }))
+
+  // Rerender saved list after removing product from localStorage
+  savedListRender();
 }
 
 const saveToSession = '';

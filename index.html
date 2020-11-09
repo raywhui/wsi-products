@@ -34,11 +34,19 @@
         <div class='card'>
           <div class='card-image'>
             <img src='{{this.image}}' />
-            <a data-product-id='{{this.id}}' data-key={{this.key}} class='btn-floating halfway-fab blue-grey lighten-1' onclick="saveToLocal(event)">
-              <i class='material-icons'>
-                star_border
-              </i>
-            </a>
+            {{#if savedList}}
+              <a data-product-id='{{this.id}}' data-key={{this.key}} class='btn-floating halfway-fab blue-grey lighten-1' onclick="removeFromLocal(event)">
+                <i class='material-icons'>
+                  remove
+                </i>
+              </a>
+            {{else}}
+              <a data-product-id='{{this.id}}' data-key={{this.key}} class='btn-floating halfway-fab blue-grey lighten-1' onclick="saveToLocal(event)">
+                <i class='material-icons'>
+                  add
+                </i>
+              </a>
+            {{/if}}
           </div>
           <div class='card-content'>
             <span class='product-title card-title'>
