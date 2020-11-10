@@ -1,0 +1,43 @@
+body .selling-price, body .regular-price {
+  font-size: 13px;
+  font-weight: 700;
+  color: #505050;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+}
+body .product-container {
+  width: 796px;
+  margin: 0 auto;
+}
+@media screen and (max-width: 796px) {
+  body .product-container {
+    width: 100%;
+  }
+}
+body .product-grid-item {
+  width: 255.3333333333px;
+  display: inline-block;
+  vertical-align: top;
+  margin: 10px 3px;
+}
+@media screen and (max-width: 796px) {
+  body .product-grid-item {
+    width: 45%;
+    margin: 0px 2.3%;
+  }
+}
+@media screen and (max-width: 600px) {
+  body .product-grid-item {
+    width: 95%;
+    margin: 0px 2.5%;
+  }
+}
+body .card .product-title.card-title {
+  font-size: 13px;
+  line-height: 1.5;
+}
+body .regular-price {
+  text-decoration: line-through;
+}
