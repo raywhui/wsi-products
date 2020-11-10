@@ -1,5 +1,5 @@
 const getData = async () => {
-  const fetchJSON = await fetch('/data/products1.json');
+  const fetchJSON = await fetch('./data/products1.json');
   const productsJSON = await fetchJSON.json();
   console.log(productsJSON);
   return productsJSON;
