@@ -5,7 +5,6 @@
 <head>
   <meta charset="utf-8" />
   <title>WSI Coding Assessment</title>
-  <!-- <link rel="stylesheet" href="css/styles.css?v=1.0" /> -->
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" />
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -19,6 +18,16 @@
   <nav>
     <div class="nav-wrapper blue-grey lighten-1">
       <ul id="nav-mobile" class="right">
+        <li>
+          <a class="toggle-local-storage">
+            <span class="new badge" data-badge-caption="Storage: Local"></span>
+          </a>
+        </li>
+        <li>
+          <a class="toggle-session-storage">
+            <span class="new badge" data-badge-caption="Storage: Session"></span>
+          </a>
+        </li>
         <li><a onclick="allProductsRender()">All Products</a></li>
         <li><a onclick="savedListRender()">Saved List</a></li>
       </ul>
@@ -35,13 +44,13 @@
           <div class='card-image'>
             <img src='{{this.image}}' />
             {{#if savedList}}
-              <a data-product-id='{{this.id}}' data-key={{this.key}} class='btn-floating halfway-fab blue-grey lighten-1' onclick="removeFromLocal(event)">
+              <a data-product-id='{{this.id}}' data-key={{this.key}} data-storage={{this.storageType}} class='btn-floating halfway-fab blue-grey lighten-1' onclick="removeFromStorage(event)">
                 <i class='material-icons'>
                   remove
                 </i>
               </a>
             {{else}}
-              <a data-product-id='{{this.id}}' data-key={{this.key}} class='btn-floating halfway-fab blue-grey lighten-1' onclick="saveToLocal(event)">
+              <a data-product-id='{{this.id}}' data-key={{this.key}} data-storage={{this.storageType}} class='btn-floating halfway-fab blue-grey lighten-1' onclick="saveToStorage(event)">
                 <i class='material-icons'>
                   add
                 </i>
@@ -65,8 +74,8 @@
   </script>
   <!-- Handlebars Product Item Template - END -->
 
-  <script src="scripts/init.js"></script>
   <script src="scripts/handlers.js"></script>
+  <script src="scripts/init.js"></script>
 </body>
 
 </html>

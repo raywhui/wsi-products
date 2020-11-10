@@ -1,17 +1,10 @@
-const getData = async () => {
-  const fetchJSON = await fetch('/data/products1.json');
-  const productsJSON = await fetchJSON.json();
-  console.log(productsJSON);
-  return productsJSON;
-};
-
 const intToCurrency = (int) => {
   const price = `$${int.toFixed(2)}`;
   return price;
 }
 
 // Compile Handlebars
-const renderProducts = (items, savedList = false) => {
+const renderProducts = (items, savedList = false, storageType) => {
   const source = document.getElementById('product-template').innerHTML;
   const cardTemplate = Handlebars.compile(source);
   const context = {
@@ -35,6 +28,7 @@ const renderProducts = (items, savedList = false) => {
       }
       return {
         savedList: savedList,
+        storageType: storageType,
         key: i,
         image: data.images[0].href,
         id: data.id,
@@ -45,8 +39,6 @@ const renderProducts = (items, savedList = false) => {
         },
       };
     }),
-    savedList: savedList,
-    titles: 'joejoe'
   };
   console.log(context)
   const html = cardTemplate(context);
@@ -54,7 +46,24 @@ const renderProducts = (items, savedList = false) => {
 }
 
 (async () => {
+  // Init storage type session or local
+  if (!!productsStorage.storageType) {
+    toggleBadge(productsStorage.getItem('storageType'))
+  } else {
+    productsStorage.setItem('storageType', 'local');
+    toggleBadge('local')
+  }
+
+  // Render all products to page with Handlebars
   const productsData = await getData();
-  const allItemsHtml = renderProducts(productsData.groups)
+  const allItemsHtml = renderProducts(productsData.groups, false, productsStorage.getItem('storageType'))
   document.querySelector('#product-list').innerHTML = allItemsHtml;
+
+  // Badges display current status, logic must set the other storage type
+  localBadge.addEventListener('click', () => {
+    handleSetSession();
+  })
+  sessionBadge.addEventListener('click', () => {
+    handleSetLocal();
+  })
 })();
